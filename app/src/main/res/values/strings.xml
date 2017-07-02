@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TamagoshiProject</string>
+    <string name="darAgua_str">Dar Agua</string>
+    <string name="darComida_str">Dar Comida</string>
 </resources>
