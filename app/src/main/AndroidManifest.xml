@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="DayvidMon"
+        android:label="FacchinettiMon"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DayvidActivity">
+        </activity>
+        <activity android:name=".DeadActivity">
         </activity>
         <service android:name=".CounterService" android:enabled="true" android:exported="true" />
 

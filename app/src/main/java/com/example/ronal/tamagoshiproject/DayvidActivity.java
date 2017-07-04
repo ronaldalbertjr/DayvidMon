@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class DayvidActivity extends AppCompatActivity implements Runnable,Servic
     Button giveWater;
     Button giveFood;
     Handler handler;
+    ImageView facchinettiImage;
     final ServiceConnection connection = this;
     private CounterService counter;
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +45,7 @@ public class DayvidActivity extends AppCompatActivity implements Runnable,Servic
         waterSlider = (ProgressBar) findViewById(R.id.water_slider);
         numberOfFood = (TextView) findViewById(R.id.number_of_food);
         numberOfWater = (TextView) findViewById(R.id.number_of_water);
+        facchinettiImage = (ImageView) findViewById(R.id.facchinettiImage);
 
         giveWater.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +112,17 @@ public class DayvidActivity extends AppCompatActivity implements Runnable,Servic
             waterSlider.setProgress(counter.waterAmount);
             numberOfFood.setText(String.valueOf(counter.foodAmount));
             numberOfWater.setText(String.valueOf(counter.waterAmount));
+            if(counter.foodAmount == 25 || counter.waterAmount == 25) {
+                facchinettiImage.setImageResource(R.drawable.facchinetti_fome);
+            }
+            if(counter.foodAmount == 0 || counter.waterAmount == 0)
+            {
+                Intent i = new Intent(DayvidActivity.this, DeadActivity.class);
+                startActivity(i);
+                finish();
+            }
         }
+
 
     }
 

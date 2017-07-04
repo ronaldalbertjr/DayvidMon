@@ -59,17 +59,18 @@ public class CounterService extends Service implements Runnable
             SaveData.SaveData("Water", waterAmount, context);
             SaveData.SaveData("Food", foodAmount, context);
 
-            if(waterAmount < 25)
+            if(waterAmount == 25)
             {
-                SendNotification("Sua água está acabando", "Vá dar água para o seu dayvid, ele está com sede");
+                SendNotification(R.drawable.facchinetti_fome, "Sua água está acabando", "Vá dar água para o seu facchinetti, ele está com sede", new Intent(this, MainActivity.class));
             }
-            else if(foodAmount < 25)
+            else if(foodAmount == 25)
             {
-                SendNotification("Sua comida está acabando", "Vá alimentar o seu dayvid, ele está com fome ");
+                SendNotification(R.drawable.facchinetti_fome, "Sua comida está acabando", "Vá alimentar o seu facchinetti, ele está com fome ", new Intent(this, MainActivity.class));
             }
             else if(waterAmount <= 0 || foodAmount <= 0)
             {
-                SendNotification("Seu dayvid morreu", "Você não cuidou bem do seu dayvid, tente novamente");
+                SendNotification(R.drawable.facchinetti_morto, "Seu facchinetti morreu", "Você não cuidou bem do seu facchinetti, tente novamente", new Intent(this, DeadActivity.class));
+                stopSelf();
             }
             SetInterval();
         }
@@ -82,13 +83,14 @@ public class CounterService extends Service implements Runnable
         catch (InterruptedException e) { e.printStackTrace(); }
     }
 
-    private void SendNotification(String title, String text)
+    private void SendNotification(int icon, String title, String text, Intent intent)
     {
         NotificationCompat.Builder mBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setAutoCancel(true);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
         mBuilder.setContentIntent(pi);
         mBuilder.setVibrate(new long[] {100, 250, 100, 500});
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

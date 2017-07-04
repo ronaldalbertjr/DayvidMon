@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity
                 startService(counterService);
             }
             startActivity(dayvidActivity);
+            finish();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
                     startService(counterService);
                 }
                 startActivity(dayvidActivity);
+                finish();
             }
         });
     }
